@@ -1,0 +1,29 @@
+# Dependency settings
+savePrefix: ""
+enableGlobalVirtualStore: true
+allowBuilds:
+  esbuild: true
+  workerd: true
+packageExtensions:
+  "drizzle-kit":
+    peerDependencies:
+      "@neondatabase/serverless": "*"
+      "drizzle-orm": "*"
+    peerDependenciesMeta:
+      "@neondatabase/serverless":
+        optional: true
+      "drizzle-orm":
+        optional: true
+  "@tanstack/react-form":
+    peerDependencies:
+      "@types/react": "*"
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true
+
+# Supply chain attack mitigation
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true
+blockExoticSubdeps: true
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 1440
