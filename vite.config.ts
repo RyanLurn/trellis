@@ -1,3 +1,4 @@
+import { cloudflare } from "@cloudflare/vite-plugin";
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
@@ -6,6 +7,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [
+    cloudflare({ viteEnvironment: { name: "ssr" } }),
     // Make sure that '@tanstack/react-start/plugin/vite' is passed before '@vitejs/plugin-react'
     tanstackStart({
       router: {
