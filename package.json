@@ -14,7 +14,8 @@
     "@tanstack/react-router": "1.170.32",
     "@tanstack/react-start": "1.168.49",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "tailwindcss": "4.3.3"
   },
   "devDependencies": {
     "@rolldown/plugin-babel": "0.2.3",
