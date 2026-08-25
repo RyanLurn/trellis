@@ -25,5 +25,11 @@
       "version": "11.23.0",
       "onFail": "download"
     }
+  },
+  "dependencies": {
+    "@tanstack/react-router": "1.170.32",
+    "@tanstack/react-start": "1.168.49",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   }
 }
