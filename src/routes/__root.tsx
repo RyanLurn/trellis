@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
-// import { Toaster } from "@/components/ui/toast";
+import { Toaster } from "@/components/ui/toast";
 import styles from "@/styles/index.css?url";
 
 export const Route = createRootRoute({
@@ -35,7 +35,7 @@ function AppShell({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body>
         <div className="h-screen">{children}</div>
-        {/* <Toaster /> */}
+        <Toaster />
         <Scripts />
       </body>
     </html>

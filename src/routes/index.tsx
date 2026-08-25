@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// import { Button } from "@/components/ui/button";
-// import { toast } from "@/components/ui/toast";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/toast";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -11,7 +11,7 @@ function HomePage() {
   return (
     <div className="typeset flex h-full flex-col items-center justify-center gap-y-3">
       <h1>Welcome home!</h1>
-      {/* <Button
+      <Button
         onClick={() =>
           toast.add({
             type: "success",
@@ -20,7 +20,7 @@ function HomePage() {
         }
       >
         Toast!
-      </Button> */}
+      </Button>
     </div>
   );
 }
