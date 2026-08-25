@@ -2,6 +2,7 @@
   "name": "trellis",
   "type": "module",
   "scripts": {
+    "dev": "vite dev",
     "fmt": "oxfmt --disable-nested-config",
     "fmt:check": "oxfmt --check --disable-nested-config",
     "lint": "oxlint --disable-nested-config",
@@ -9,10 +10,20 @@
     "check": "pnpm run lint && pnpm run fmt:check",
     "fix": "pnpm run lint:fix && pnpm run fmt"
   },
+  "dependencies": {
+    "@tanstack/react-router": "1.170.32",
+    "@tanstack/react-start": "1.168.49",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
   "devDependencies": {
+    "@rolldown/plugin-babel": "0.2.3",
+    "@tailwindcss/vite": "4.3.3",
     "@types/node": "26.2.0",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
+    "@vitejs/plugin-react": "6.1.0",
+    "babel-plugin-react-compiler": "1.0.0",
     "oxfmt": "0.64.0",
     "oxlint": "1.79.0",
     "oxlint-tsgolint": "7.0.2001",
@@ -25,11 +36,5 @@
       "version": "11.23.0",
       "onFail": "download"
     }
-  },
-  "dependencies": {
-    "@tanstack/react-router": "1.170.32",
-    "@tanstack/react-start": "1.168.49",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
   }
 }
