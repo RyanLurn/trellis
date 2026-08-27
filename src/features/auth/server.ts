@@ -12,6 +12,7 @@ import { userTable } from "@/db/schema/tables/user";
 import { verificationTable } from "@/db/schema/tables/verification";
 import {
   COOKIE_PREFIX,
+  DONT_REMEMBER_NAME,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
   SESSION_DATA_NAME,
@@ -51,6 +52,9 @@ export function createAuthServer({
         },
         session_data: {
           name: SESSION_DATA_NAME,
+        },
+        dont_remember: {
+          name: DONT_REMEMBER_NAME,
         },
       },
     },

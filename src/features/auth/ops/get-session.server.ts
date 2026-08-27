@@ -5,6 +5,7 @@ import type { AuthServer, AuthSession } from "@/features/auth/types";
 import type { Result } from "@/types/result";
 
 import {
+  DONT_REMEMBER_COOKIE,
   SESSION_DATA_COOKIE,
   SESSION_TOKEN_COOKIE,
 } from "@/features/auth/constants";
@@ -39,6 +40,7 @@ export const getAuthSessionServerOnlyFn = createServerOnlyFn(
           context: {
             hasSessionToken: cookies.has(SESSION_TOKEN_COOKIE),
             hassSessionData: cookies.has(SESSION_DATA_COOKIE),
+            hasDontRemember: cookies.has(DONT_REMEMBER_COOKIE),
           },
         }),
       );
