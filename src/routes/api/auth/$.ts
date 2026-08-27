@@ -18,6 +18,9 @@ export const Route = createFileRoute("/api/auth/$")({
           const internalServerError = new InternalServerError({
             cause: invalidEnvError,
           });
+
+          console.error(internalServerError.deepSerialize());
+
           return Response.json(internalServerError.shallowSerialize(), {
             status: internalServerError.status.code,
             statusText: internalServerError.status.text,
@@ -36,6 +39,9 @@ export const Route = createFileRoute("/api/auth/$")({
           return await authServer.handler(request);
         } catch (error) {
           const internalServerError = new InternalServerError({ cause: error });
+
+          console.error(internalServerError.deepSerialize());
+
           return Response.json(internalServerError.shallowSerialize(), {
             status: internalServerError.status.code,
             statusText: internalServerError.status.text,
