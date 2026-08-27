@@ -24,3 +24,9 @@ export class InternalServerError extends HttpError<"INTERNAL_SERVER_ERROR"> {
     super({ message: message ?? DEFAULT_ERROR_MESSAGE, cause });
   }
 }
+
+export class UnauthorizedError extends HttpError<"UNAUTHORIZED"> {
+  readonly name = "UnauthorizedError";
+  readonly code = "UNAUTHORIZED";
+  readonly status = HTTP_ERROR_RESPONSE_STATUS_RECORD[this.code];
+}
