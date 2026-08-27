@@ -1,8 +1,13 @@
 import { createServerOnlyFn } from "@tanstack/react-start";
+import { parseCookies } from "better-auth/cookies/utils";
 
 import type { AuthServer, AuthSession } from "@/features/auth/types";
 import type { Result } from "@/types/result";
 
+import {
+  SESSION_DATA_COOKIE,
+  SESSION_TOKEN_COOKIE,
+} from "@/features/auth/constants";
 import { UnauthenticatedError } from "@/features/auth/utils/error/classes/unauthenticated";
 import { UnexpectedError } from "@/utils/error/classes/unexpected";
 import { err, ok } from "@/utils/result";
@@ -26,8 +31,16 @@ export const getAuthSessionServerOnlyFn = createServerOnlyFn(
 
       return ok(authSession);
     } catch (error) {
+      const cookies = parseCookies(headers.get("cookie") ?? "");
       return err(
-        new UnexpectedError({ failedTo: "get auth session", cause: error }),
+        new UnexpectedError({
+          failedTo: "get auth session",
+          cause: error,
+          context: {
+            hasSessionToken: cookies.has(SESSION_TOKEN_COOKIE),
+            hassSessionData: cookies.has(SESSION_DATA_COOKIE),
+          },
+        }),
       );
     }
   },
