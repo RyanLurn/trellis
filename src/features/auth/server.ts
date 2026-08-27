@@ -11,8 +11,11 @@ import { sessionTable } from "@/db/schema/tables/session";
 import { userTable } from "@/db/schema/tables/user";
 import { verificationTable } from "@/db/schema/tables/verification";
 import {
+  COOKIE_PREFIX,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
+  SESSION_DATA_NAME,
+  SESSION_TOKEN_NAME,
 } from "@/features/auth/constants";
 
 export function createAuthServer({
@@ -40,6 +43,15 @@ export function createAuthServer({
       database: {
         generateId: false,
         joins: true,
+      },
+      cookiePrefix: COOKIE_PREFIX,
+      cookies: {
+        session_token: {
+          name: SESSION_TOKEN_NAME,
+        },
+        session_data: {
+          name: SESSION_DATA_NAME,
+        },
       },
     },
     emailAndPassword: {
