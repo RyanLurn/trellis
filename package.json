@@ -9,7 +9,10 @@
     "lint": "oxlint --disable-nested-config",
     "lint:fix": "oxlint --fix --disable-nested-config",
     "check": "pnpm run lint && pnpm run fmt:check",
-    "fix": "pnpm run lint:fix && pnpm run fmt"
+    "fix": "pnpm run lint:fix && pnpm run fmt",
+    "db:check": "drizzle-kit check",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
@@ -42,6 +45,7 @@
     "@types/react-dom": "19.2.5",
     "@vitejs/plugin-react": "6.1.0",
     "babel-plugin-react-compiler": "1.0.0",
+    "drizzle-kit": "1.0.0-rc.4",
     "oxfmt": "0.65.0",
     "oxlint": "1.80.0",
     "oxlint-tsgolint": "7.0.2001",
