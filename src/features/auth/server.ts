@@ -12,11 +12,11 @@ import { userTable } from "@/db/schema/tables/user";
 import { verificationTable } from "@/db/schema/tables/verification";
 import {
   COOKIE_PREFIX,
-  DONT_REMEMBER_NAME,
+  DONT_REMEMBER_COOKIE_SUFFIX,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
-  SESSION_DATA_NAME,
-  SESSION_TOKEN_NAME,
+  SESSION_DATA_COOKIE_SUFFIX,
+  SESSION_TOKEN_COOKIE_SUFFIX,
 } from "@/features/auth/constants";
 
 export function createAuthServer({
@@ -48,13 +48,13 @@ export function createAuthServer({
       cookiePrefix: COOKIE_PREFIX,
       cookies: {
         session_token: {
-          name: SESSION_TOKEN_NAME,
+          name: SESSION_TOKEN_COOKIE_SUFFIX,
         },
         session_data: {
-          name: SESSION_DATA_NAME,
+          name: SESSION_DATA_COOKIE_SUFFIX,
         },
         dont_remember: {
-          name: DONT_REMEMBER_NAME,
+          name: DONT_REMEMBER_COOKIE_SUFFIX,
         },
       },
     },
