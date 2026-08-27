@@ -29,4 +29,12 @@ export class UnauthorizedError extends HttpError<"UNAUTHORIZED"> {
   readonly name = "UnauthorizedError";
   readonly code = "UNAUTHORIZED";
   readonly status = HTTP_ERROR_RESPONSE_STATUS_RECORD[this.code];
+
+  constructor({ message, cause }: { message?: string; cause?: unknown }) {
+    super({
+      message:
+        message ?? HTTP_ERROR_RESPONSE_STATUS_RECORD["UNAUTHORIZED"].text,
+      cause: cause ?? "No valid session.",
+    });
+  }
 }

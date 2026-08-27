@@ -9,7 +9,7 @@ import {
   SESSION_DATA_COOKIE,
   SESSION_TOKEN_COOKIE,
 } from "@/features/auth/constants";
-import { UnauthenticatedError } from "@/features/auth/utils/error/classes/unauthenticated";
+import { UnauthorizedError } from "@/utils/error/classes/http";
 import { UnexpectedError } from "@/utils/error/classes/unexpected";
 import { err, ok } from "@/utils/result";
 
@@ -20,14 +20,14 @@ export const getAuthSessionServerOnlyFn = createServerOnlyFn(
   }: {
     authServer: AuthServer;
     headers: Headers;
-  }): Promise<Result<AuthSession, UnauthenticatedError | UnexpectedError>> => {
+  }): Promise<Result<AuthSession, UnauthorizedError | UnexpectedError>> => {
     try {
       const authSession = await authServer.api.getSession({
         headers,
       });
 
       if (authSession === null) {
-        return err(new UnauthenticatedError({}));
+        return err(new UnauthorizedError({}));
       }
 
       return ok(authSession);
