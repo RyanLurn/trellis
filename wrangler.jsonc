@@ -8,14 +8,14 @@
   "observability": {
     "enabled": true,
   },
-  "r2_buckets": [
-    { "bucket_name": "trellis-bucket", "binding": "TRELLIS_BUCKET" },
-  ],
-  "workflows": [
-    {
-      "name": "trellis-file-uploader",
-      "binding": "TRELLIS_FILE_UPLOADER",
-      "class_name": "TrellisFileUploader",
-    },
-  ],
+  // "r2_buckets": [
+  //   { "bucket_name": "trellis-bucket", "binding": "TRELLIS_BUCKET" },
+  // ],
+  // "workflows": [
+  //   {
+  //     "name": "trellis-file-uploader",
+  //     "binding": "TRELLIS_FILE_UPLOADER",
+  //     "class_name": "TrellisFileUploader",
+  //   },
+  // ],
 }
