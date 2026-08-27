@@ -39,7 +39,7 @@ export const getAuthSessionServerOnlyFn = createServerOnlyFn(
           cause: error,
           context: {
             hasSessionToken: cookies.has(SESSION_TOKEN_COOKIE),
-            hassSessionData: cookies.has(SESSION_DATA_COOKIE),
+            hasSessionData: cookies.has(SESSION_DATA_COOKIE),
             hasDontRemember: cookies.has(DONT_REMEMBER_COOKIE),
           },
         }),
