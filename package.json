@@ -12,7 +12,8 @@
     "fix": "pnpm run lint:fix && pnpm run fmt",
     "db:check": "drizzle-kit check",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "test": "vitest run"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
