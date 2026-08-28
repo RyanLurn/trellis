@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { z } from "zod";
 
+import { InvalidJsonError } from "@/utils/error/classes/invalid-json";
 import { ValidationError } from "@/utils/error/classes/validation";
 import { parseResponse } from "@/utils/fetch/response/parse";
 
@@ -27,5 +28,16 @@ describe("parseResponse function should", async () => {
 
     expect.assert(result.ok === false);
     expect(result.error).toBeInstanceOf(ValidationError);
+  });
+
+  test("return an invalid JSON error on invalid json body", async () => {
+    const body = `{ data: "test data" `;
+    const response = new Response(body);
+    const schema = z.object({ data: z.string() });
+
+    const result = await parseResponse({ response, schema });
+
+    expect.assert(result.ok === false);
+    expect(result.error).toBeInstanceOf(InvalidJsonError);
   });
 });
