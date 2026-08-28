@@ -1,7 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "types": ["node", "react", "vite/client"],
+    "types": [
+      "node",
+      "react",
+      "vite/client",
+      "@cloudflare/vitest-plugin/types",
+      "vitest"
+    ],
     "lib": ["ESNext", "DOM"],
     "target": "esnext",
     "module": "preserve",

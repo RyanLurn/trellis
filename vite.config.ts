@@ -1,4 +1,7 @@
+/// <reference types="vitest/config" />
+
 import { cloudflare } from "@cloudflare/vite-plugin";
+import { cloudflareTest } from "@cloudflare/vitest-plugin";
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
@@ -8,6 +11,9 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [
     cloudflare({ viteEnvironment: { name: "ssr" } }),
+    cloudflareTest({
+      wrangler: { configPath: "./wrangler.jsonc" },
+    }),
     // Make sure that '@tanstack/react-start/plugin/vite' is passed before '@vitejs/plugin-react'
     tanstackStart({
       router: {
@@ -24,5 +30,10 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+  },
+  test: {
+    typecheck: {
+      enabled: true,
+    },
   },
 });
