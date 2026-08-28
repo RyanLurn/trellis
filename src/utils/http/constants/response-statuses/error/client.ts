@@ -21,6 +21,10 @@ export const HTTP_CLIENT_ERROR_RESPONSE_STATUS_RECORD = {
     code: 409,
     text: "Conflict",
   },
+  UNPROCESSABLE_CONTENT: {
+    code: 422,
+    text: "Unprocessable Content",
+  },
   TOO_MANY_REQUESTS: {
     code: 429,
     text: "Too Many Requests",

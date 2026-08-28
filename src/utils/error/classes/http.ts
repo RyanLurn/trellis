@@ -64,3 +64,18 @@ export class NotFoundError extends HttpError<"NOT_FOUND"> {
     });
   }
 }
+
+export class UnprocessableContentError extends HttpError<"UNPROCESSABLE_CONTENT"> {
+  readonly name = "UnprocessableContentError";
+  readonly code = "UNPROCESSABLE_CONTENT";
+  readonly status = HTTP_ERROR_RESPONSE_STATUS_RECORD[this.code];
+
+  constructor({ message, cause }: { message?: string; cause?: unknown }) {
+    super({
+      message:
+        message ??
+        HTTP_ERROR_RESPONSE_STATUS_RECORD["UNPROCESSABLE_CONTENT"].text,
+      cause,
+    });
+  }
+}
