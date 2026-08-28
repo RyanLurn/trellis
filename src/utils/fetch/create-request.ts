@@ -11,11 +11,17 @@ export function createRequest({
   try {
     return ok(new Request(input, init));
   } catch (error) {
+    const url =
+      typeof input === "string"
+        ? input
+        : input instanceof URL
+          ? input.href
+          : input.url;
     return err(
       new UnexpectedError({
         failedTo: "create request",
         cause: error,
-        context: { input, init },
+        context: { url },
       }),
     );
   }

@@ -18,11 +18,17 @@ export async function safeFetch({ input, init }: RequestParams) {
     const response = await fetch(request);
     return ok(response);
   } catch (error) {
+    const url =
+      typeof input === "string"
+        ? input
+        : input instanceof URL
+          ? input.href
+          : input.url;
     return err(
       new UnexpectedError({
         failedTo: "fetch",
         cause: error,
-        context: { input, init },
+        context: { url },
       }),
     );
   }
