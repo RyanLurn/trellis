@@ -38,3 +38,16 @@ export class UnauthorizedError extends HttpError<"UNAUTHORIZED"> {
     });
   }
 }
+
+export class ForbiddenError extends HttpError<"FORBIDDEN"> {
+  readonly name = "ForbiddenError";
+  readonly code = "FORBIDDEN";
+  readonly status = HTTP_ERROR_RESPONSE_STATUS_RECORD[this.code];
+
+  constructor({ message, cause }: { message?: string; cause?: unknown }) {
+    super({
+      message: message ?? HTTP_ERROR_RESPONSE_STATUS_RECORD["FORBIDDEN"].text,
+      cause,
+    });
+  }
+}
