@@ -79,3 +79,17 @@ export class UnprocessableContentError extends HttpError<"UNPROCESSABLE_CONTENT"
     });
   }
 }
+
+export class TooManyRequestsError extends HttpError<"TOO_MANY_REQUESTS"> {
+  readonly name = "TooManyRequestsError";
+  readonly code = "TOO_MANY_REQUESTS";
+  readonly status = HTTP_ERROR_RESPONSE_STATUS_RECORD[this.code];
+
+  constructor({ message, cause }: { message?: string; cause?: unknown }) {
+    super({
+      message:
+        message ?? HTTP_ERROR_RESPONSE_STATUS_RECORD["TOO_MANY_REQUESTS"].text,
+      cause,
+    });
+  }
+}
