@@ -4,7 +4,7 @@ import { z } from "zod";
 import { InvalidJsonError } from "@/utils/error/classes/invalid-json";
 import { UnexpectedError } from "@/utils/error/classes/unexpected";
 import { ValidationError } from "@/utils/error/classes/validation";
-import { parseResponse } from "@/utils/fetch/response/parse";
+import { parseResponse } from "@/utils/fetch/parse-response";
 
 // Happy path
 test("parseResponse function should parse valid response", async () => {
