@@ -51,3 +51,16 @@ export class ForbiddenError extends HttpError<"FORBIDDEN"> {
     });
   }
 }
+
+export class NotFoundError extends HttpError<"NOT_FOUND"> {
+  readonly name = "NotFoundError";
+  readonly code = "NOT_FOUND";
+  readonly status = HTTP_ERROR_RESPONSE_STATUS_RECORD[this.code];
+
+  constructor({ message, cause }: { message?: string; cause?: unknown }) {
+    super({
+      message: message ?? HTTP_ERROR_RESPONSE_STATUS_RECORD["NOT_FOUND"].text,
+      cause,
+    });
+  }
+}
