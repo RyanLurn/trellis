@@ -52,3 +52,6 @@ try.ts
 
 # Wrangler
 .wrangler
+
+# Mailtrap Local
+data

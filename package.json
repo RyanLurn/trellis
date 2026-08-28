@@ -13,7 +13,8 @@
     "db:check": "drizzle-kit check",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "test": "vitest run"
+    "test": "vitest run",
+    "try": "tsx --env-file-if-exists=.env src/try.ts"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
@@ -52,6 +53,7 @@
     "oxfmt": "0.65.0",
     "oxlint": "1.80.0",
     "oxlint-tsgolint": "7.0.2001",
+    "tsx": "4.23.12",
     "typescript": "7.0.2",
     "vite": "8.2.2",
     "vitest": "4.1.11",
