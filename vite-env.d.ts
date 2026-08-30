@@ -4,7 +4,7 @@ interface ViteTypeOptions {
 
 interface ImportMetaEnv extends Readonly<
   // oxlint-disable-next-line typescript/consistent-type-imports
-  import("@/features/auth/schemas/env/vite").AuthViteEnv
+  import("@/config/env/vite").ViteEnv
 > {}
 
 interface ImportMeta {
