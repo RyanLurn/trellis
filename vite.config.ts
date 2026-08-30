@@ -6,14 +6,11 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig, loadEnv } from "vite";
 
-import {
-  VITE_ENV_KEY_PREFIX,
-  ViteEnvVarsSchema,
-} from "./src/config/env/vite.ts";
+import { VITE_ENV_KEY_PREFIX, ViteEnvSchema } from "./src/config/env/vite.ts";
 
 export default defineConfig(({ mode }) => {
   const viteEnv = loadEnv(mode, process.cwd(), VITE_ENV_KEY_PREFIX);
-  const parseEnvResult = ViteEnvVarsSchema.safeParse(viteEnv, {
+  const parseEnvResult = ViteEnvSchema.safeParse(viteEnv, {
     reportInput: true,
   });
   if (!parseEnvResult.success) {
