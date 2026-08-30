@@ -1,7 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { parseCookies } from "better-auth/cookies/utils";
 
+import {
+  DONT_REMEMBER_COOKIE,
+  SESSION_DATA_COOKIE,
+  SESSION_TOKEN_COOKIE,
+} from "@/features/auth/constants";
 import { authServer } from "@/features/auth/server";
-import { InternalServerError } from "@/utils/error/classes/http";
+import { DefaultError } from "@/utils/error/classes/default";
+import { UnexpectedError } from "@/utils/error/classes/unexpected";
+import { HTTP_SERVER_ERROR_RESPONSE_STATUS_RECORD } from "@/utils/http/constants/response-statuses/error/server";
 
 export const Route = createFileRoute("/api/auth/$")({
   server: {
@@ -10,13 +18,27 @@ export const Route = createFileRoute("/api/auth/$")({
         try {
           return await authServer.handler(request);
         } catch (error) {
-          const internalServerError = new InternalServerError({ cause: error });
+          const cookies = parseCookies(request.headers.get("cookie") ?? "");
+          const unexpectedError = new UnexpectedError({
+            failedTo: "handle auth request",
+            cause: error,
+            context: {
+              url: request.url,
+              method: request.method,
+              hasSessionToken: cookies.has(SESSION_TOKEN_COOKIE),
+              hasSessionData: cookies.has(SESSION_DATA_COOKIE),
+              hasDontRemember: cookies.has(DONT_REMEMBER_COOKIE),
+            },
+          });
 
-          console.error(internalServerError.deepSerialize());
+          const defaultError = new DefaultError({ cause: unexpectedError });
+          console.error(defaultError.deepSerialize());
 
-          return Response.json(internalServerError.shallowSerialize(), {
-            status: internalServerError.status.code,
-            statusText: internalServerError.status.text,
+          const httpStatus =
+            HTTP_SERVER_ERROR_RESPONSE_STATUS_RECORD["INTERNAL_SERVER_ERROR"];
+          return Response.json(defaultError.shallowSerialize(), {
+            status: httpStatus.code,
+            statusText: httpStatus.text,
           });
         }
       },
