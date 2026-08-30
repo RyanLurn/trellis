@@ -1,13 +1,15 @@
+import type { ErrorComponentProps } from "@tanstack/react-router";
+import type { FallbackProps } from "react-error-boundary";
+
 import { Link } from "@tanstack/react-router";
 
 import { Button, buttonVariants } from "@/components/ui/button";
+import { DEFAULT_ERROR_MESSAGE } from "@/utils/error/constants";
 
-interface DefaultErrorPageProps {
-  error: Error;
-  reset: () => void;
-}
-
-export function DefaultErrorPage({ error, reset }: DefaultErrorPageProps) {
+export function DefaultErrorPage({
+  error,
+  reset,
+}: ErrorComponentProps<FallbackProps["error"]>) {
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6">
       <div className="flex w-full max-w-md flex-col gap-6">
@@ -23,10 +25,10 @@ export function DefaultErrorPage({ error, reset }: DefaultErrorPageProps) {
         </div>
 
         {/* Error message (dev-friendly) */}
-        {import.meta.env.DEV && error.message && (
+        {import.meta.env.DEV && (
           <div className="rounded-lg border border-border bg-muted/50 px-3.5 py-3">
             <p className="font-mono text-xs leading-relaxed break-all text-muted-foreground">
-              {error.message}
+              {error instanceof Error ? error.message : DEFAULT_ERROR_MESSAGE}
             </p>
           </div>
         )}
