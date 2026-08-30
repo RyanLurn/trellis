@@ -28,9 +28,7 @@
   "include": [
     "src/**/*",
     "drizzle.config.ts",
-    "shared.config.ts",
     "vite.config.ts",
-    "vitest.config.ts",
     "vite-env.d.ts"
   ]
 }
