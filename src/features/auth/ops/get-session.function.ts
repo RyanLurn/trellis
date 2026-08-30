@@ -1,24 +1,22 @@
 import { createServerFn } from "@tanstack/react-start";
-import {
-  getRequestHeaders,
-  setResponseStatus,
-} from "@tanstack/react-start/server";
+import { getRequestHeaders } from "@tanstack/react-start/server";
 
+import type { UnauthenticatedError } from "@/features/auth/errors";
 import type { AuthSession } from "@/features/auth/types";
 import type { FlatErrorObject } from "@/types/error";
 import type { Result } from "@/types/result";
-import type { UnauthorizedError } from "@/utils/error/classes/http";
 
 import { getAuthSessionServerOnlyFn } from "@/features/auth/ops/get-session.server";
-import { InternalServerError } from "@/utils/error/classes/http";
+import { DefaultError } from "@/utils/error/classes/default";
+import { setHttpResponseStatus } from "@/utils/http/set-response-status";
 import { err } from "@/utils/result";
 
 export const getAuthSessionServerFn = createServerFn().handler(
   async (): Promise<
     Result<
       AuthSession,
-      | FlatErrorObject<UnauthorizedError["code"]>
-      | FlatErrorObject<InternalServerError["code"]>
+      | FlatErrorObject<UnauthenticatedError["code"]>
+      | FlatErrorObject<DefaultError["code"]>
     >
   > => {
     const headers = getRequestHeaders();
@@ -33,20 +31,19 @@ export const getAuthSessionServerFn = createServerFn().handler(
 
     const error = getAuthSessionResult.error;
 
-    if (error.code === "UNAUTHORIZED") {
+    if (error.code === "UNAUTHENTICATED_ERROR") {
       console.error(error.deepSerialize());
-      setResponseStatus(error.status.code, error.status.text);
+
+      setHttpResponseStatus("UNAUTHORIZED");
       return err(error.shallowSerialize());
     }
 
-    const internalServerError = new InternalServerError({
+    const defaultError = new DefaultError({
       cause: error,
     });
-    console.error(internalServerError.deepSerialize());
-    setResponseStatus(
-      internalServerError.status.code,
-      internalServerError.status.text,
-    );
-    return err(internalServerError.shallowSerialize());
+    console.error(defaultError.deepSerialize());
+
+    setHttpResponseStatus("INTERNAL_SERVER_ERROR");
+    return err(defaultError.shallowSerialize());
   },
 );
