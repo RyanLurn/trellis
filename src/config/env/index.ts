@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const EnvVarsSchema = z.object({
+export const EnvSchema = z.object({
   NEON_POOLED_CONNECTION_STRING: z.templateLiteral(
     [
       "postgresql://",
@@ -21,4 +21,4 @@ export const EnvVarsSchema = z.object({
     .min(32, { error: "Auth secret must be at least 32 characters long." }),
 });
 
-export const envVars = EnvVarsSchema.parse(process.env);
+export const env = EnvSchema.parse(process.env);

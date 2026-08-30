@@ -1,14 +1,8 @@
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 
-import type { NeonPooledConnectionString } from "@/db/env";
-
+import { env } from "@/config/env";
 import { relations } from "@/db/schema/relations";
 
-export function createDb(connectionString: NeonPooledConnectionString) {
-  const client = neon(connectionString);
-  const db = drizzle({ client, relations });
-  return db;
-}
-
-export type DB = ReturnType<typeof createDb>;
+const client = neon(env.NEON_POOLED_CONNECTION_STRING);
+export const db = drizzle({ client, relations });
