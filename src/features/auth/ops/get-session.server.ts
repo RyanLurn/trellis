@@ -1,7 +1,7 @@
 import { createServerOnlyFn } from "@tanstack/react-start";
 import { parseCookies } from "better-auth/cookies/utils";
 
-import type { AuthServer, AuthSession } from "@/features/auth/types";
+import type { AuthSession } from "@/features/auth/types";
 import type { Result } from "@/types/result";
 
 import {
@@ -9,16 +9,15 @@ import {
   SESSION_DATA_COOKIE,
   SESSION_TOKEN_COOKIE,
 } from "@/features/auth/constants";
+import { authServer } from "@/features/auth/server";
 import { UnauthorizedError } from "@/utils/error/classes/http";
 import { UnexpectedError } from "@/utils/error/classes/unexpected";
 import { err, ok } from "@/utils/result";
 
 export const getAuthSessionServerOnlyFn = createServerOnlyFn(
   async ({
-    authServer,
     headers,
   }: {
-    authServer: AuthServer;
     headers: Headers;
   }): Promise<Result<AuthSession, UnauthorizedError | UnexpectedError>> => {
     try {
