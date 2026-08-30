@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_authenticated")({
     }
 
     const error = getAuthSessionResult.error;
-    if (error.code === "UNAUTHORIZED") {
+    if (error.code === "UNAUTHENTICATED_ERROR") {
       throw redirect({
         to: "/sign-in",
         search: { redirect: location.pathname },
