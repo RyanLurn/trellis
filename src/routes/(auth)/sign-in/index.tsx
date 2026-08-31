@@ -2,6 +2,14 @@ import { useSelector } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { BASE_ERROR_CODES } from "better-auth";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
 import { SignInParamsSchema } from "@/features/auth/schemas";
@@ -84,5 +92,21 @@ function SignInPage() {
     (state) => state.isSubmitting,
   );
 
-  return <div>Hello "/(auth)/sign-in/"!</div>;
+  return (
+    <div className="flex size-full flex-col items-center justify-center">
+      <Card className="w-full sm:max-w-sm">
+        {/* Form card's header */}
+        <CardHeader>
+          <CardTitle className="text-xl">Sign in</CardTitle>
+          <CardDescription>
+            Enter your credentials below to sign in.
+          </CardDescription>
+        </CardHeader>
+        {/* Form card's content */}
+        <CardContent></CardContent>
+        {/* Form card's footer */}
+        <CardFooter className="flex-col gap-y-2"></CardFooter>
+      </Card>
+    </div>
+  );
 }
