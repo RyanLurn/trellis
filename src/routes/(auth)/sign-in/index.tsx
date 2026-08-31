@@ -5,6 +5,7 @@ import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
 import { SignInParamsSchema } from "@/features/auth/schemas";
 import { useAppForm } from "@/lib/form/hooks";
+import { DEFAULT_ERROR_MESSAGE } from "@/utils/error/constants";
 import { RedirectSearchParamSchema } from "@/utils/schemas/redirect";
 
 export const Route = createFileRoute("/(auth)/sign-in/")({
@@ -43,7 +44,7 @@ function SignInPage() {
       if (data) {
         toast.add({
           type: "success",
-          title: "Sign up succeeded",
+          title: "Sign in succeeded",
           description: `Welcome back, ${data.user.name}.`,
         });
         await navigate({ to: redirect ?? "/account" });
@@ -67,6 +68,13 @@ function SignInPage() {
         }));
         return;
       }
+
+      toast.add({
+        type: "error",
+        title: "Sign in failed",
+        description: error.message ?? DEFAULT_ERROR_MESSAGE,
+      });
+      return;
     },
   });
 
