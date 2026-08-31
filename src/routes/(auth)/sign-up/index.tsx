@@ -123,7 +123,16 @@ function SignUpPage() {
           </CardDescription>
         </CardHeader>
         {/* Form card's content */}
-        <CardContent></CardContent>
+        <CardContent>
+          {/* Form element */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              void signUpForm.handleSubmit();
+            }}
+            id={signUpForm.formId}
+          ></form>
+        </CardContent>
         {/* Form card's footer */}
         <CardFooter className="flex-col gap-y-2"></CardFooter>
       </Card>
