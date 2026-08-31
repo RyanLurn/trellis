@@ -17,6 +17,7 @@ import { MIN_PASSWORD_LENGTH } from "@/features/auth/constants";
 import {
   EmailSchema,
   PasswordSchema,
+  RememberMeSchema,
   SignInParamsSchema,
 } from "@/features/auth/schemas";
 import { useAppForm } from "@/lib/form/hooks";
@@ -148,6 +149,21 @@ function SignInPage() {
                     disabled={isSubmitting}
                     label="Password"
                     type="password"
+                  />
+                )}
+              </signInForm.AppField>
+              {/* Remember me checkbox */}
+              <signInForm.AppField
+                name="rememberMe"
+                validators={{
+                  onChange: RememberMeSchema,
+                }}
+              >
+                {({ CheckField }) => (
+                  <CheckField
+                    disabled={isSubmitting}
+                    className="rounded-sm"
+                    label="Remember me"
                   />
                 )}
               </signInForm.AppField>
