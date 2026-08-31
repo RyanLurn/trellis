@@ -1,5 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  useNavigate,
+  useRouter,
+} from "@tanstack/react-router";
 
+import { toast } from "@/components/ui/toast";
+import { authClient } from "@/features/auth/client";
 import { SignUpParamsSchema } from "@/features/auth/schemas";
 import { useAppForm } from "@/lib/form/hooks";
 import { RedirectSearchParamSchema } from "@/utils/schemas/redirect";
@@ -11,6 +17,7 @@ export const Route = createFileRoute("/(auth)/sign-up/")({
 
 function SignUpPage() {
   const { redirect } = Route.useSearch();
+  const navigate = useNavigate({ from: `${Route.path}/` });
 
   const signUpForm = useAppForm({
     formId: "sign-up-form",
@@ -22,6 +29,30 @@ function SignUpPage() {
     },
     validators: {
       onSubmit: SignUpParamsSchema,
+    },
+    onSubmit: async ({ value }) => {
+      // The SignUpParamsSchema transforms name and email.
+      // However, TanStack Form doesn't use the output of validators for the value.
+      // So, we need to parse it again here to get the transformed name and email.
+      const { name, email, password } = SignUpParamsSchema.parse(value);
+
+      // Sign up operation
+      const { data } = await authClient.signUp.email({
+        name,
+        email,
+        password,
+      });
+
+      // Handle success case
+      if (data) {
+        toast.add({
+          type: "success",
+          title: "Sign up succeeded",
+          description: `Welcome, ${data.user.name}.`,
+        });
+        await navigate({ to: redirect ?? "/account" });
+        return;
+      }
     },
   });
 
