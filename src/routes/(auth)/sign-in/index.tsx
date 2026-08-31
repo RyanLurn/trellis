@@ -1,5 +1,5 @@
 import { useSelector } from "@tanstack/react-form";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { BASE_ERROR_CODES } from "better-auth";
 
 import {
@@ -20,6 +20,7 @@ import {
   RememberMeSchema,
   SignInParamsSchema,
 } from "@/features/auth/schemas";
+import { cn } from "@/lib/cn";
 import { useAppForm } from "@/lib/form/hooks";
 import { DEFAULT_ERROR_MESSAGE } from "@/utils/error/constants";
 import { RedirectSearchParamSchema } from "@/utils/schemas/redirect";
@@ -180,6 +181,24 @@ function SignInPage() {
               className="w-full"
             />
           </signInForm.AppForm>
+          {/* Sign up link */}
+          <div className="w-full text-center text-muted-foreground">
+            <span>Don&apos;t have an account?</span>{" "}
+            <Link
+              className={cn(
+                isSubmitting
+                  ? ""
+                  : "underline underline-offset-2 hover:text-primary",
+              )}
+              search={{
+                redirect,
+              }}
+              disabled={isSubmitting}
+              to="/sign-up"
+            >
+              Sign up
+            </Link>
+          </div>
         </CardFooter>
       </Card>
     </div>
