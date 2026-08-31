@@ -224,7 +224,16 @@ function SignUpPage() {
           </form>
         </CardContent>
         {/* Form card's footer */}
-        <CardFooter className="flex-col gap-y-2"></CardFooter>
+        <CardFooter className="flex-col gap-y-2">
+          {/* Submit button */}
+          <signUpForm.AppForm>
+            <signUpForm.SubmitButton
+              submittingText="Signing up..."
+              submitText="Sign up"
+              className="w-full"
+            />
+          </signUpForm.AppForm>
+        </CardFooter>
       </Card>
     </div>
   );
