@@ -9,9 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FieldGroup } from "@/components/ui/field";
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
-import { SignUpParamsSchema } from "@/features/auth/schemas";
+import { NameSchema, SignUpParamsSchema } from "@/features/auth/schemas";
 import { useAppForm } from "@/lib/form/hooks";
 import { DEFAULT_ERROR_MESSAGE } from "@/utils/error/constants";
 import { RedirectSearchParamSchema } from "@/utils/schemas/redirect";
@@ -131,7 +132,26 @@ function SignUpPage() {
               void signUpForm.handleSubmit();
             }}
             id={signUpForm.formId}
-          ></form>
+          >
+            <FieldGroup>
+              {/* Name field */}
+              <signUpForm.AppField
+                name="name"
+                validators={{
+                  onChange: NameSchema,
+                }}
+              >
+                {({ TextField }) => (
+                  <TextField
+                    placeholder="Your Name"
+                    disabled={isSubmitting}
+                    label="Name"
+                    type="text"
+                  />
+                )}
+              </signUpForm.AppField>
+            </FieldGroup>
+          </form>
         </CardContent>
         {/* Form card's footer */}
         <CardFooter className="flex-col gap-y-2"></CardFooter>
