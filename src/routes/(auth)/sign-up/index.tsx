@@ -1,5 +1,5 @@
 import { useSelector } from "@tanstack/react-form";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 
 import {
   Card,
@@ -20,6 +20,7 @@ import {
   PasswordSchema,
   SignUpParamsSchema,
 } from "@/features/auth/schemas";
+import { cn } from "@/lib/cn";
 import { useAppForm } from "@/lib/form/hooks";
 import { DEFAULT_ERROR_MESSAGE } from "@/utils/error/constants";
 import { RedirectSearchParamSchema } from "@/utils/schemas/redirect";
@@ -233,6 +234,24 @@ function SignUpPage() {
               className="w-full"
             />
           </signUpForm.AppForm>
+          {/* Sign in link */}
+          <div className="w-full text-center text-muted-foreground">
+            <span>Already have an account?</span>{" "}
+            <Link
+              className={cn(
+                isSubmitting
+                  ? ""
+                  : "underline underline-offset-2 hover:text-primary",
+              )}
+              search={{
+                redirect,
+              }}
+              disabled={isSubmitting}
+              to="/sign-in"
+            >
+              Sign in
+            </Link>
+          </div>
         </CardFooter>
       </Card>
     </div>
