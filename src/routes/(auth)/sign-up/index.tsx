@@ -12,9 +12,11 @@ import {
 import { FieldGroup } from "@/components/ui/field";
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
+import { MIN_PASSWORD_LENGTH } from "@/features/auth/constants";
 import {
   EmailSchema,
   NameSchema,
+  PasswordSchema,
   SignUpParamsSchema,
 } from "@/features/auth/schemas";
 import { useAppForm } from "@/lib/form/hooks";
@@ -167,6 +169,22 @@ function SignUpPage() {
                     disabled={isSubmitting}
                     label="Email"
                     type="email"
+                  />
+                )}
+              </signUpForm.AppField>
+              {/* Password field */}
+              <signUpForm.AppField
+                name="password"
+                validators={{
+                  onChange: PasswordSchema,
+                }}
+              >
+                {({ TextField }) => (
+                  <TextField
+                    placeholder={"*".repeat(MIN_PASSWORD_LENGTH)}
+                    disabled={isSubmitting}
+                    label="Password"
+                    type="password"
                   />
                 )}
               </signUpForm.AppField>
