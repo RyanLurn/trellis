@@ -12,7 +12,11 @@ import {
 import { FieldGroup } from "@/components/ui/field";
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
-import { NameSchema, SignUpParamsSchema } from "@/features/auth/schemas";
+import {
+  EmailSchema,
+  NameSchema,
+  SignUpParamsSchema,
+} from "@/features/auth/schemas";
 import { useAppForm } from "@/lib/form/hooks";
 import { DEFAULT_ERROR_MESSAGE } from "@/utils/error/constants";
 import { RedirectSearchParamSchema } from "@/utils/schemas/redirect";
@@ -147,6 +151,22 @@ function SignUpPage() {
                     disabled={isSubmitting}
                     label="Name"
                     type="text"
+                  />
+                )}
+              </signUpForm.AppField>
+              {/* Email field */}
+              <signUpForm.AppField
+                name="email"
+                validators={{
+                  onChange: EmailSchema,
+                }}
+              >
+                {({ TextField }) => (
+                  <TextField
+                    placeholder="youremail@example.com"
+                    disabled={isSubmitting}
+                    label="Email"
+                    type="email"
                   />
                 )}
               </signUpForm.AppField>
