@@ -1,5 +1,6 @@
 import { useSelector } from "@tanstack/react-form";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { BASE_ERROR_CODES } from "better-auth";
 
 import {
   Card,
@@ -72,15 +73,14 @@ function SignUpPage() {
       // Handle error cases
       const errorCode = error.code;
 
-      if (errorCode === authClient.$ERROR_CODES.INVALID_EMAIL.code) {
+      if (errorCode === BASE_ERROR_CODES.INVALID_EMAIL.code) {
         formApi.setFieldMeta("email", (prev) => ({
           ...prev,
           errorMap: {
             onServer: [
               {
                 message:
-                  error.message ??
-                  authClient.$ERROR_CODES.INVALID_EMAIL.message,
+                  error.message ?? BASE_ERROR_CODES.INVALID_EMAIL.message,
               },
             ],
           },
@@ -89,17 +89,16 @@ function SignUpPage() {
       }
 
       if (
-        errorCode === authClient.$ERROR_CODES.INVALID_PASSWORD.code ||
-        errorCode === authClient.$ERROR_CODES.PASSWORD_TOO_SHORT.code ||
-        errorCode === authClient.$ERROR_CODES.PASSWORD_TOO_LONG.code
+        errorCode === BASE_ERROR_CODES.INVALID_PASSWORD.code ||
+        errorCode === BASE_ERROR_CODES.PASSWORD_TOO_SHORT.code ||
+        errorCode === BASE_ERROR_CODES.PASSWORD_TOO_LONG.code
       ) {
         formApi.setFieldMeta("password", (prev) => ({
           ...prev,
           errorMap: {
             onServer: [
               {
-                message:
-                  error.message ?? authClient.$ERROR_CODES[errorCode].message,
+                message: error.message ?? BASE_ERROR_CODES[errorCode].message,
               },
             ],
           },
