@@ -32,7 +32,7 @@ export const Route = createFileRoute("/(auth)/sign-up/")({
 
 function SignUpPage() {
   const { redirect } = Route.useSearch();
-  const navigate = useNavigate({ from: `${Route.path}/` });
+  const navigate = useNavigate({ from: "/sign-up/" });
 
   const signUpForm = useAppForm({
     formId: "sign-up-form",
