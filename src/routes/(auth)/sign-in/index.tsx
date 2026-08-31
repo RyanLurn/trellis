@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { BASE_ERROR_CODES } from "better-auth";
 
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
@@ -25,14 +26,14 @@ function SignInPage() {
     validators: {
       onSubmit: SignInParamsSchema,
     },
-    onSubmit: async ({ value }) => {
+    onSubmit: async ({ value, formApi }) => {
       // The SignInParamsSchema transforms email.
       // However, TanStack Form doesn't use the output of validators for the value.
       // So, we need to parse it again here to get the transformed email.
       const { email, password, rememberMe } = SignInParamsSchema.parse(value);
 
       // Sign in operation
-      const { data } = await authClient.signIn.email({
+      const { data, error } = await authClient.signIn.email({
         email,
         password,
         rememberMe,
@@ -46,6 +47,24 @@ function SignInPage() {
           description: `Welcome back, ${data.user.name}.`,
         });
         await navigate({ to: redirect ?? "/account" });
+        return;
+      }
+
+      // Handle error cases
+      const errorCode = error.code;
+
+      if (errorCode === BASE_ERROR_CODES.INVALID_EMAIL.code) {
+        formApi.setFieldMeta("email", (prev) => ({
+          ...prev,
+          errorMap: {
+            onServer: [
+              {
+                message:
+                  error.message ?? BASE_ERROR_CODES.INVALID_EMAIL.message,
+              },
+            ],
+          },
+        }));
         return;
       }
     },
