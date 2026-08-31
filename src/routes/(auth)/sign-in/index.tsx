@@ -13,7 +13,7 @@ import {
 import { FieldGroup } from "@/components/ui/field";
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
-import { SignInParamsSchema } from "@/features/auth/schemas";
+import { EmailSchema, SignInParamsSchema } from "@/features/auth/schemas";
 import { useAppForm } from "@/lib/form/hooks";
 import { DEFAULT_ERROR_MESSAGE } from "@/utils/error/constants";
 import { RedirectSearchParamSchema } from "@/utils/schemas/redirect";
@@ -113,7 +113,24 @@ function SignInPage() {
             }}
             id={signInForm.formId}
           >
-            <FieldGroup></FieldGroup>
+            <FieldGroup>
+              {/* Email field */}
+              <signInForm.AppField
+                name="email"
+                validators={{
+                  onChange: EmailSchema,
+                }}
+              >
+                {({ TextField }) => (
+                  <TextField
+                    placeholder="youremail@example.com"
+                    disabled={isSubmitting}
+                    label="Email"
+                    type="email"
+                  />
+                )}
+              </signInForm.AppField>
+            </FieldGroup>
           </form>
         </CardContent>
         {/* Form card's footer */}
