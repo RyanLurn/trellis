@@ -1,3 +1,4 @@
+import { useSelector } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { BASE_ERROR_CODES } from "better-auth";
 
@@ -77,6 +78,11 @@ function SignInPage() {
       return;
     },
   });
+
+  const isSubmitting = useSelector(
+    signInForm.store,
+    (state) => state.isSubmitting,
+  );
 
   return <div>Hello "/(auth)/sign-in/"!</div>;
 }
