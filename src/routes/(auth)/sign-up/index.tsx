@@ -1,3 +1,4 @@
+import { useSelector } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 import { toast } from "@/components/ui/toast";
@@ -97,6 +98,11 @@ function SignUpPage() {
       return;
     },
   });
+
+  const isSubmitting = useSelector(
+    signUpForm.store,
+    (state) => state.isSubmitting,
+  );
 
   return <div>Hello "/(auth)/sign-up/"!</div>;
 }
