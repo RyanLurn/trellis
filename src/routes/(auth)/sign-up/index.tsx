@@ -1,6 +1,14 @@
 import { useSelector } from "@tanstack/react-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
 import { SignUpParamsSchema } from "@/features/auth/schemas";
@@ -104,5 +112,21 @@ function SignUpPage() {
     (state) => state.isSubmitting,
   );
 
-  return <div>Hello "/(auth)/sign-up/"!</div>;
+  return (
+    <div className="flex size-full flex-col items-center justify-center">
+      <Card className="w-full sm:max-w-sm">
+        {/* Form card's header */}
+        <CardHeader>
+          <CardTitle className="text-xl">Sign up</CardTitle>
+          <CardDescription>
+            Enter your information below to create an account.
+          </CardDescription>
+        </CardHeader>
+        {/* Form card's content */}
+        <CardContent></CardContent>
+        {/* Form card's footer */}
+        <CardFooter className="flex-col gap-y-2"></CardFooter>
+      </Card>
+    </div>
+  );
 }
