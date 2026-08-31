@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FieldGroup } from "@/components/ui/field";
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/features/auth/client";
 import { SignInParamsSchema } from "@/features/auth/schemas";
@@ -103,7 +104,18 @@ function SignInPage() {
           </CardDescription>
         </CardHeader>
         {/* Form card's content */}
-        <CardContent></CardContent>
+        <CardContent>
+          {/* Form element */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              void signInForm.handleSubmit();
+            }}
+            id={signInForm.formId}
+          >
+            <FieldGroup></FieldGroup>
+          </form>
+        </CardContent>
         {/* Form card's footer */}
         <CardFooter className="flex-col gap-y-2"></CardFooter>
       </Card>
